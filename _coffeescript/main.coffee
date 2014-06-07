@@ -1,0 +1,2 @@
+$ ->
+  # Your coffeescript here

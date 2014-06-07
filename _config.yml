@@ -1,0 +1,12 @@
+name: Turtles
+markdown: rdiscount
+highlighter: pygments
+exclude: [
+  "node_modules",
+  "gulp.js",
+  "gulpfile.coffee",
+  "package.json",
+  "README.md",
+  "Gemfile",
+  "Gemfile.lock"
+]
