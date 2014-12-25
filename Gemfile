@@ -1,5 +1,5 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
-gem 'jekyll', '~> 2.0.3'
-gem 'rdiscount', '~> 2.1.7.1'
-gem 'sass', '~> 3.3.8'
+gem "jekyll", "~> 2.5.3"
+gem "rouge", "~> 1.7.7"
+gem "kramdown", "~> 1.5.0"
