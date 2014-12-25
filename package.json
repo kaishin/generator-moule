@@ -1,7 +1,7 @@
 {
-  "name": "gulp-static-template",
+  "name": "moule",
   "version": "0.1.0",
-  "description": "Static sites with Gulp and Jekyll",
+  "description": "/mul/ A static site mold using Gulp.js & Jekyll",
   "main": "gulp.js",
   "devDependencies": {
     "browser-sync": "^0.8.2",
@@ -10,9 +10,6 @@
     "gulp-autoprefixer": "0.0.7",
     "gulp-coffee": "^2.0.0",
     "gulp-ruby-sass": "^0.5.0"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Reda Lemeden",
   "license": "MIT"
