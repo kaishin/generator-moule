@@ -1,0 +1,5 @@
+url: <%= projectUrl %>
+future: false
+show_drafts: false
+lsi: true
+limit_posts: 0

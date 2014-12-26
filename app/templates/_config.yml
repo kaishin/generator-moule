@@ -1,0 +1,28 @@
+title: <%= projectName %>
+description: <%= projectDescription %>
+tagline: <%= projectTagline %>
+baseurl: ""
+
+# These will be overriden during build
+url: localhost:4000
+future: true
+show_drafts: true
+lsi: false
+limit_posts: 10
+
+author:
+  name: <%= authorName %>
+
+markdown: kramdown
+  input: GFM
+highlighter: rouge
+
+exclude: [
+  "node_modules",
+  "gulp.js",
+  "gulpfile.coffee",
+  "package.json",
+  "README.md",
+  "Gemfile",
+  "Gemfile.lock"
+]
