@@ -1,8 +1,8 @@
 {
-  "name": "<%= _.slugify(appname) %>",
+  "name": "<%= _.slugify(projectName) %>",
   "private": true,
   "version": "0.0.0",
-  "description": "Yeoman workflow for <%= appname %>",
+  "description": "Gulp & Jekyll workflow for <%= projectName %>",
   "dependencies": {},
   "main": "gulp.js",
   "devDependencies": {
