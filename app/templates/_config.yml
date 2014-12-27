@@ -1,3 +1,5 @@
+source: source
+
 title: <%= projectName %>
 description: <%= projectDescription %>
 tagline: <%= projectTagline %>
@@ -14,8 +16,9 @@ author:
   name: <%= authorName %>
 
 markdown: kramdown
-  input: GFM
 highlighter: rouge
+kramdown:
+  input: GFM
 
 exclude: [
   "node_modules",
