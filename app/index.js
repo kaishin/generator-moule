@@ -26,24 +26,23 @@ module.exports = yeoman.generators.Base.extend({
   prompting: function () {
     var done = this.async();
 
-    // Have Yeoman greet the user.
-    this.log(yosay(
-      "Welcome to the terrific" + chalk.red("Moule") + " generator!"
-    ));
+    this.log("This is " + chalk.red("Moule") + ", a Web site generator. Tell us about your project, will ya?");
 
     var prompts = [{
       name: "authorName",
       message: "Author name:"
     }, {
       name: "projectName",
-      message: "Project name:"
+      message: "Project name:",
+      default: "My awesome site"
     }, {
       name: "projectDescription",
       message: "Project description:",
-      default: ""
+      default: "My awesome description"
     }, {
       name: "projectTagline",
-      message: "Project tagline:"
+      message: "Project tagline:",
+      default: "My awesome tagline"
     }, {
       name: "projectUrl",
       message: "Project production URL:"
@@ -63,17 +62,15 @@ module.exports = yeoman.generators.Base.extend({
   scaffolding: function () {
     this.copy("Gemfile", "Gemfile");
     this.copy("bowerrc", ".bowerrc");
-    this.copy("_bower.json", "bower.json");
     this.template("_package.json", "package.json");
     this.template("_config.yml", "_config.yml");
     this.template("_config.build.yml", "_config.build.yml");
     this.template("_README.md", "README.md");
-    this.copy("gulpfile.js", "gulpfile.js");
+    this.copy("gulp.js", "gulp.js");
     this.copy("gulpfile.coffee", "gulpfile.coffee");
     this.copy("gitignore", ".gitignore");
-    this.copy("gitattributes", ".gitattributes");
     this.copy("editorconfig", ".editorconfig");
-    this.directory("app", "source");
+    this.directory("source", "source");
   },
 
   install: function () {
