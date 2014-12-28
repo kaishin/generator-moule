@@ -1,8 +1,4 @@
-@import 'vendor/normalize';
-@import 'vendor/bourbon/bourbon';
-@import 'base/base';
-@import 'vendor/neat/neat';
-@import 'syntax';
+@import "syntax";
 
 #delete-me {
   background: $base-background-color;
