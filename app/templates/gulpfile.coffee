@@ -6,14 +6,17 @@ coffee = require "gulp-coffee"
 prefix = require "gulp-autoprefixer"
 shell = require "gulp-shell"
 
-messages = jekyllBuild: "Rebuilding Jekyll..."
+messages =
+  jekyllBuild: "Rebuilding Jekyll..."
+  sassReload: "Reloading stylesheets..."
 
-gulp.task "default", ["browser-sync", "watch"]
+gulp.task "default", ["develop"]
+gulp.task "develop", ["browser-sync", "watch"]
 
 gulp.task "clean",
   del.bind(null, ["_site"])
 
-gulp.task "watch", ->
+gulp.task "watch", ["sass", "coffee", "jekyll-build:dev"], ->
   gulp.watch "_scss/*.scss", ["sass"]
   gulp.watch "_coffeescript/*.coffee", ["coffee"]
   gulp.watch ["index.html", "_layouts/*.html", "_posts/*"], ["jekyll-rebuild"]
@@ -29,12 +32,13 @@ gulp.task "doctor",
   shell.task "jekyll doctor"
 
 gulp.task "sass", ->
-  gulp.src("_scss/main.scss")
-    .pipe sass(bundleExec: true)
-    .pipe prefix(["last 15 versions", "> 1%", "ie 8", "ie 7" ], cascade: true)
+  gulp.src("source/_scss/*.scss")
+    .pipe sass
+      outputStyle: "compressed"
+    .pipe prefix ["last 2 versions", "> 2%", "ie 11", "Firefox ESR"], cascade: false
     .pipe gulp.dest("_site/css")
+    .pipe gulp.dest("source/css")
     .pipe browserSync.reload(stream: true)
-    .pipe gulp.dest("css")
 
 gulp.task "coffee", ->
   gulp.src("_coffeescript/main.coffee")
@@ -46,8 +50,10 @@ gulp.task "coffee", ->
 gulp.task "jekyll-rebuild", ["jekyll-build:dev"], ->
   browserSync.reload()
 
-gulp.task "browser-sync", ["sass", "coffee", "jekyll-build"], ->
+gulp.task "browser-sync", ->
   browserSync.init null,
     server:
       baseDir: "_site"
     host: "localhost"
+    open: true
+    browser: "chrome"
