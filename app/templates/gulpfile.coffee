@@ -20,6 +20,7 @@ paths =
   destinationStyles: "#{destinationFolder}/css/"
   scripts: "#{sourceFolder}/scripts/"
   destinationScripts: "#{destinationFolder}/scripts/"
+  jekyllFiles: ["#{sourceFolder}/**/*.md", "#{sourceFolder}/**/*.html", "#{sourceFolder}/**/*.xml"]
 
 gulp.task "default", ["develop"]
 gulp.task "develop", ["browser-sync", "watch"]
@@ -29,16 +30,16 @@ gulp.task "clean",
   del.bind(null, ["_site"])
 
 gulp.task "watch", ["sass", "coffee", "jekyll-build:dev"], ->
-  gulp.watch "_scss/*.scss", ["sass"]
-  gulp.watch "_coffeescript/*.coffee", ["coffee"]
-  gulp.watch ["index.html", "_layouts/*.html", "_posts/*"], ["jekyll-rebuild"]
+  gulp.watch "#{paths.sass}/*.scss", ["sass"]
+  gulp.watch "#{paths.coffee}/*.coffee", ["coffee"]
+  gulp.watch paths.jekyllFiles, ["jekyll-rebuild"]
 
 gulp.task "jekyll-build:dev",
-  shell.task "jekyll build"
+  shell.task "jekyll build", quiet: true
   browserSync.notify messages.jekyllBuild
 
 gulp.task "jekyll-build:prod",
-  shell.task "jekyll build --config _config.yml,_config.build.yml"
+  shell.task "jekyll build --config _config.yml,_config.build.yml", quiet: true
 
 gulp.task "doctor",
   shell.task "jekyll doctor"

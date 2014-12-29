@@ -29,3 +29,10 @@ exclude: [
   "Gemfile",
   "Gemfile.lock"
 ]
+
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      layout: default
