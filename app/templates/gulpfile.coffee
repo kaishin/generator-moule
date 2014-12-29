@@ -39,7 +39,7 @@ gulp.task "jekyll-build:dev",
   browserSync.notify messages.jekyllBuild
 
 gulp.task "jekyll-build:prod",
-  shell.task "jekyll build --config _config.yml,_config.build.yml", quiet: true
+  shell.task "jekyll build --config _config.yml,_config.build.yml"
 
 gulp.task "doctor",
   shell.task "jekyll doctor"
