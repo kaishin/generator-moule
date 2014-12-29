@@ -14,6 +14,7 @@
     "gulp-coffee": "^2.2.0",
     "gulp-sass": "^1.2.2",
     "gulp-shell": "^0.2.11",
+    "gulp-util": "^3.0.1",
     "run-sequence": "^0.3.7"
   },
   "engines": {
