@@ -41,11 +41,11 @@ gulp.task "sass", ->
     .pipe browserSync.reload(stream: true)
 
 gulp.task "coffee", ->
-  gulp.src("_coffeescript/main.coffee")
+  gulp.src("source/_coffee/*.coffee")
     .pipe coffee bare: true
-    .pipe gulp.dest("_site/js")
+    .pipe gulp.dest("_site/scripts")
+    .pipe gulp.dest("source/scripts")
     .pipe browserSync.reload(stream: true)
-    .pipe gulp.dest("js")
 
 gulp.task "jekyll-rebuild", ["jekyll-build:dev"], ->
   browserSync.reload()

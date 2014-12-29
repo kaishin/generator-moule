@@ -1,2 +1,2 @@
 $ ->
-  # Your coffeescript here
+  console.log "Hello, world!"
