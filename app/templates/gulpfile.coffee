@@ -10,22 +10,22 @@ messages = jekyllBuild: "Rebuilding Jekyll..."
 
 gulp.task "default", ["browser-sync", "watch"]
 
-gulp.task "clean", ->
-  del.bind null, ["_site"]
+gulp.task "clean",
+  del.bind(null, ["_site"])
 
 gulp.task "watch", ->
   gulp.watch "_scss/*.scss", ["sass"]
   gulp.watch "_coffeescript/*.coffee", ["coffee"]
   gulp.watch ["index.html", "_layouts/*.html", "_posts/*"], ["jekyll-rebuild"]
 
-gulp.task "jekyll-build:dev", ->
+gulp.task "jekyll-build:dev",
   browserSync.notify messages.jekyllBuild
   shell.task "jekyll build"
 
-gulp.task "jekyll-build:prod", ->
+gulp.task "jekyll-build:prod",
   shell.task "jekyll build --config _config.yml,_config.build.yml"
 
-gulp.task "doctor", ->
+gulp.task "doctor",
   shell.task "jekyll doctor"
 
 gulp.task "sass", ->
