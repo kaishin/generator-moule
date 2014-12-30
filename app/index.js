@@ -60,17 +60,17 @@ module.exports = yeoman.generators.Base.extend({
   },
 
   scaffolding: function () {
-    this.copy("Gemfile", "Gemfile");
+    this.copy("Gemfile");
     this.copy("bowerrc", ".bowerrc");
     this.template("_package.json", "package.json");
-    this.template("_config.yml", "_config.yml");
-    this.template("_config.build.yml", "_config.build.yml");
+    this.template("_config.yml");
+    this.template("_config.build.yml");
     this.template("_README.md", "README.md");
-    this.copy("gulp.js", "gulp.js");
-    this.copy("gulpfile.coffee", "gulpfile.coffee");
+    this.copy("gulp.js");
+    this.copy("gulpfile.coffee");
     this.copy("gitignore", ".gitignore");
     this.copy("editorconfig", ".editorconfig");
-    this.directory("source", "source");
+    this.directory("source");
   },
 
   install: function () {
