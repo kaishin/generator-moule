@@ -26,7 +26,7 @@ module.exports = yeoman.generators.Base.extend({
   prompting: function () {
     var done = this.async();
 
-    this.log("This is " + chalk.red("Moule") + ", a Web site generator. Tell us about your project, will ya?");
+    this.log("This is " + chalk.blue("Moule") + ", a Web site generator. Tell us about your project, will ya?");
 
     var prompts = [{
       name: "authorName",
@@ -46,6 +46,11 @@ module.exports = yeoman.generators.Base.extend({
     }, {
       name: "projectUrl",
       message: "Project production URL:"
+    }, {
+      name: "hasBlog",
+      type: "confirm",
+      message: "Enable blog support?",
+      default: true
     }];
 
     this.prompt(prompts, function (props) {
@@ -54,6 +59,7 @@ module.exports = yeoman.generators.Base.extend({
       this.projectTagline = props.projectTagline;
       this.projectUrl = props.projectUrl;
       this.authorName = props.authorName;
+      this.hasBlog = props.hasBlog;
 
       done();
     }.bind(this));
@@ -70,7 +76,18 @@ module.exports = yeoman.generators.Base.extend({
     this.copy("gulpfile.coffee");
     this.copy("gitignore", ".gitignore");
     this.copy("editorconfig", ".editorconfig");
-    this.directory("source");
+    this.directory("source/_coffee");
+    this.directory("source/_layouts");
+    this.directory("source/_includes");
+    this.directory("source/_scss");
+    this.directory("source/css");
+    this.directory("source/scripts");
+    this.copy("source/index.md");
+
+    if (this.hasBlog) {
+      this.directory("source/_posts");
+      this.copy("source/feed.xml");
+    }
   },
 
   install: function () {
