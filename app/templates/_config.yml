@@ -20,6 +20,7 @@ highlighter: rouge
 kramdown:
   input: GFM
 
+permalink: pretty
 exclude: [
   "node_modules",
   "gulp.js",
