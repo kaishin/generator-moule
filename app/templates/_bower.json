@@ -1,0 +1,7 @@
+{
+  "name": "<%= _.slugify(projectName) %>",
+  "private": true,
+  "devDependencies": {
+    "water.scss": "~0.1.2"
+  }
+}

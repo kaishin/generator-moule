@@ -69,6 +69,7 @@ module.exports = yeoman.generators.Base.extend({
     this.copy("Gemfile");
     this.copy("bowerrc", ".bowerrc");
     this.template("_package.json", "package.json");
+    this.template("_bower.json", "bower.json");
     this.template("_config.yml");
     this.template("_config.build.yml");
     this.template("_README.md", "README.md");
