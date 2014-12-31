@@ -78,6 +78,8 @@ module.exports = yeoman.generators.Base.extend({
     this.copy("editorconfig", ".editorconfig");
     this.directory("source/_coffee");
     this.directory("source/_layouts");
+    this.copy("source/_layouts/page.html");
+    this.copy("source/_layouts/default.html");
     this.directory("source/_includes");
     this.directory("source/_scss");
     this.directory("source/css");
@@ -87,6 +89,7 @@ module.exports = yeoman.generators.Base.extend({
     if (this.hasBlog) {
       this.directory("source/_posts");
       this.copy("source/feed.xml");
+      this.copy("source/_layouts/post.html");
     }
   },
 
