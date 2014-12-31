@@ -97,7 +97,8 @@ module.exports = yeoman.generators.Base.extend({
     var skipInstall = this.options["skip-install"];
 
     if (!skipInstall) {
-      this.spawnCommand("bundle", ["install"]);
+      console.log("Installing dependencies...")
+      this.spawnCommand("bundle", ["install", "--quiet"]);
       this.installDependencies();
     }
   }
