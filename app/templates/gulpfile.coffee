@@ -4,6 +4,7 @@ coffee = require "gulp-coffee"
 del = require "del"
 gulp = require "gulp"
 gutil = require "gulp-util"
+mediaQueries = require "gulp-combine-media-queries"
 prefix = require "gulp-autoprefixer"
 sass = require "gulp-sass"
 shell = require "gulp-shell"
@@ -49,9 +50,9 @@ gulp.task "sass", ->
   gulp.src("#{paths.sass}/*.scss")
     .pipe sass
       errLogToConsole: true
-      outputStyle: "compressed"
       precision: 2
     .pipe prefix ["last 2 versions", "> 2%", "ie 11", "Firefox ESR"], cascade: false
+    .pipe mediaQueries()
     .pipe gulp.dest(paths.destinationStyles)
     .pipe gulp.dest(paths.styles)
     .pipe browserSync.reload(stream: true)
