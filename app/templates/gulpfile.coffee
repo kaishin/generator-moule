@@ -5,12 +5,13 @@ del = require "del"
 gulp = require "gulp"
 gutil = require "gulp-util"
 mediaQueries = require "gulp-combine-media-queries"
+minifyCSS = require "gulp-minify-css"
+minifyJS = require "gulp-uglify"
 prefix = require "gulp-autoprefixer"
 runSequence = require "run-sequence"
 sass = require "gulp-sass"
+scssLint = require "gulp-scss-lint"
 shell = require "gulp-shell"
-minifyCSS = require "gulp-minify-css"
-minifyJS = require "gulp-uglify"
 
 messages =
   jekyllBuild: "Rebuilding Jekyll..."
@@ -53,7 +54,7 @@ gulp.task "jekyll-rebuild", ["jekyll-serve"], ->
 gulp.task "doctor",
   shell.task "jekyll doctor"
 
-gulp.task "sass", ->
+gulp.task "sass", ["lintSass"], ->
   gulp.src("#{paths.sass}/*.scss")
     .pipe sass
       errLogToConsole: true
@@ -61,6 +62,7 @@ gulp.task "sass", ->
     .pipe prefix ["last 2 versions", "> 2%", "ie 11", "Firefox ESR"], cascade: false
     .pipe mediaQueries()
     .pipe gulp.dest(paths.destinationStyles)
+    .pipe gulp.dest(paths.styles)
     .pipe browserSync.reload(stream: true)
 
 gulp.task "minifyCSS", ->
@@ -70,12 +72,22 @@ gulp.task "minifyCSS", ->
     .pipe gulp.dest(paths.destinationStyles)
     .pipe gulp.dest(paths.styles)
 
+gulp.task "lintSass", ->
+  gulp.src("#{paths.sass}/*.scss")
+    .pipe cache paths.sass
+    .pipe scssLint
+      "config": ".scss-lint.yml",
+      "bundleExec": true
+    .pipe scssLint.failReporter()
+    .on "error", (error) -> gutil.log(error.message)
+
 gulp.task "coffee", ->
   gulp.src("#{paths.coffee}/*.coffee")
     .pipe cache paths.coffee
     .pipe coffee bare: true
     .on "error", (error) -> gutil.log(error.message)
     .pipe gulp.dest(paths.destinationScripts)
+    .pipe gulp.dest(paths.scripts)
     .pipe browserSync.reload(stream: true)
 
 gulp.task "minifyJS", ->

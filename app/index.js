@@ -77,6 +77,7 @@ module.exports = yeoman.generators.Base.extend({
     this.copy("gulpfile.coffee");
     this.copy("gitignore", ".gitignore");
     this.copy("editorconfig", ".editorconfig");
+    this.copy("scss-lint.yml", ".scss-lint.yml");
     this.directory("source/_coffee");
     this.directory("source/_layouts");
     this.copy("source/_layouts/page.html");
