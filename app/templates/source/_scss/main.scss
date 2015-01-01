@@ -2,21 +2,13 @@
 @import "syntax";
 
 #delete-me {
-  background: green;
-  color: #FFF;
   font-size: 3em;
   font-weight: 300;
-  height: 100vh;
-  line-height: 0.7;
-  padding-top: 45vh;
-  position: relative;
   text-align: center;
-  width: 100%;
+  padding: 40vh 0;
 
   span {
-    font-weight: 300;
-    font-size: .4em;
-    display: block;
-    margin-left: 4em;
+    font-size: 0.4em;
+    margin-top: 0.5em;
   }
 }

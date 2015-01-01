@@ -1,8 +1,8 @@
 ---
-title: "I like turtles"
+layout: default
 ---
 
 <h1 id="delete-me">
   Hello, world.
-  <span>— The Great Wise Turtle</span>
+  <span>— Moule</span>
 </h1>

@@ -2,6 +2,7 @@
   "name": "<%= _.slugify(projectName) %>",
   "private": true,
   "devDependencies": {
-    "water.scss": "~0.1.2"
+    "water.scss": "~0.1.2",
+    "normalize-scss": "~3.0.2"
   }
 }
