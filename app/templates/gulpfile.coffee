@@ -6,6 +6,7 @@ gulp = require "gulp"
 gutil = require "gulp-util"
 mediaQueries = require "gulp-combine-media-queries"
 prefix = require "gulp-autoprefixer"
+runSequence = require "run-sequence"
 sass = require "gulp-sass"
 shell = require "gulp-shell"
 
@@ -26,7 +27,9 @@ paths =
 
 gulp.task "default", ["develop"]
 gulp.task "develop", ["browser-sync", "watch"]
-gulp.task "build", ["sass", "coffee", "jekyll-build"]
+
+gulp.task "build", ->
+  runSequence ["sass", "coffee"], "jekyll-build"
 
 gulp.task "clean",
   del.bind(null, ["_site"])
