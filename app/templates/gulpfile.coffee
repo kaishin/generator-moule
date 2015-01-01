@@ -9,6 +9,8 @@ prefix = require "gulp-autoprefixer"
 runSequence = require "run-sequence"
 sass = require "gulp-sass"
 shell = require "gulp-shell"
+minifyCSS = require "gulp-minify-css"
+minifyJS = require "gulp-uglify"
 
 messages =
   jekyllBuild: "Rebuilding Jekyll..."
@@ -27,9 +29,8 @@ paths =
 
 gulp.task "default", ["develop"]
 gulp.task "develop", ["browser-sync", "watch"]
-
 gulp.task "build", ->
-  runSequence ["sass", "coffee"], "jekyll-build"
+  runSequence ["sass", "coffee"], ["minifyCSS", "minifyJS"], "jekyll-build"
 
 gulp.task "clean",
   del.bind(null, ["_site"])
@@ -60,8 +61,14 @@ gulp.task "sass", ->
     .pipe prefix ["last 2 versions", "> 2%", "ie 11", "Firefox ESR"], cascade: false
     .pipe mediaQueries()
     .pipe gulp.dest(paths.destinationStyles)
-    .pipe gulp.dest(paths.styles)
     .pipe browserSync.reload(stream: true)
+
+gulp.task "minifyCSS", ->
+  gulp.src("#{paths.destinationStyles}/*.css")
+    .pipe cache paths.styles
+    .pipe minifyCSS()
+    .pipe gulp.dest(paths.destinationStyles)
+    .pipe gulp.dest(paths.styles)
 
 gulp.task "coffee", ->
   gulp.src("#{paths.coffee}/*.coffee")
@@ -69,8 +76,14 @@ gulp.task "coffee", ->
     .pipe coffee bare: true
     .on "error", (error) -> gutil.log(error.message)
     .pipe gulp.dest(paths.destinationScripts)
-    .pipe gulp.dest(paths.scripts)
     .pipe browserSync.reload(stream: true)
+
+gulp.task "minifyJS", ->
+  gulp.src("#{paths.destinationScripts}/*.js")
+    .pipe cache paths.scripts
+    .pipe minifyJS()
+    .pipe gulp.dest(paths.destinationScripts)
+    .pipe gulp.dest(paths.scripts)
 
 gulp.task "browser-sync", ->
   browserSync.init null,
