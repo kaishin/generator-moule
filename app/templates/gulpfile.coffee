@@ -26,22 +26,25 @@ paths =
 
 gulp.task "default", ["develop"]
 gulp.task "develop", ["browser-sync", "watch"]
-gulp.task "build", ["sass", "coffee", "jekyll-build:prod"]
+gulp.task "build", ["sass", "coffee", "jekyll-build"]
 
 gulp.task "clean",
   del.bind(null, ["_site"])
 
-gulp.task "watch", ["sass", "coffee", "jekyll-build:dev"], ->
+gulp.task "watch", ["sass", "coffee", "jekyll-serve"], ->
   gulp.watch "#{paths.sass}/*.scss", ["sass"]
   gulp.watch "#{paths.coffee}/*.coffee", ["coffee"]
   gulp.watch paths.jekyllFiles, ["jekyll-rebuild"]
 
-gulp.task "jekyll-build:dev",
+gulp.task "jekyll-serve",
   shell.task "jekyll build --config _config.yml,_config.serve.yml", quiet: true
   browserSync.notify messages.jekyllBuild
 
-gulp.task "jekyll-build:prod",
+gulp.task "jekyll-build",
   shell.task "jekyll build"
+
+gulp.task "jekyll-rebuild", ["jekyll-serve"], ->
+  browserSync.reload()
 
 gulp.task "doctor",
   shell.task "jekyll doctor"
@@ -65,9 +68,6 @@ gulp.task "coffee", ->
     .pipe gulp.dest(paths.destinationScripts)
     .pipe gulp.dest(paths.scripts)
     .pipe browserSync.reload(stream: true)
-
-gulp.task "jekyll-rebuild", ["jekyll-build:dev"], ->
-  browserSync.reload()
 
 gulp.task "browser-sync", ->
   browserSync.init null,
