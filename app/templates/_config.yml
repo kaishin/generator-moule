@@ -5,12 +5,11 @@ description: <%= projectDescription %>
 tagline: <%= projectTagline %>
 baseurl: ""
 
-# These will be overriden during build
-url: localhost:4000
-future: true
-show_drafts: true
-lsi: false
-limit_posts: 10
+url: <%= projectUrl %>
+future: false
+show_drafts: false
+lsi: true
+limit_posts: 0
 
 author:
   name: <%= authorName %>

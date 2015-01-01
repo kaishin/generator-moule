@@ -37,11 +37,11 @@ gulp.task "watch", ["sass", "coffee", "jekyll-build:dev"], ->
   gulp.watch paths.jekyllFiles, ["jekyll-rebuild"]
 
 gulp.task "jekyll-build:dev",
-  shell.task "jekyll build", quiet: true
+  shell.task "jekyll build --config _config.yml,_config.serve.yml", quiet: true
   browserSync.notify messages.jekyllBuild
 
 gulp.task "jekyll-build:prod",
-  shell.task "jekyll build --config _config.yml,_config.build.yml"
+  shell.task "jekyll build"
 
 gulp.task "doctor",
   shell.task "jekyll doctor"
@@ -74,5 +74,6 @@ gulp.task "browser-sync", ->
     server:
       baseDir: "_site"
     host: "localhost"
+    port: 4000
     open: true
     browser: "chrome"
