@@ -1,11 +1,12 @@
-gulp = require "gulp"
-del = require "del"
 browserSync = require "browser-sync"
-sass = require "gulp-sass"
+cache = require "gulp-cached"
 coffee = require "gulp-coffee"
-prefix = require "gulp-autoprefixer"
-shell = require "gulp-shell"
+del = require "del"
+gulp = require "gulp"
 gutil = require "gulp-util"
+prefix = require "gulp-autoprefixer"
+sass = require "gulp-sass"
+shell = require "gulp-shell"
 
 messages =
   jekyllBuild: "Rebuilding Jekyll..."
@@ -57,6 +58,7 @@ gulp.task "sass", ->
 
 gulp.task "coffee", ->
   gulp.src("#{paths.coffee}/*.coffee")
+    .pipe cache paths.coffee
     .pipe coffee bare: true
     .on "error", (error) -> gutil.log(error.message)
     .pipe gulp.dest(paths.destinationScripts)
