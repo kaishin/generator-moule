@@ -11,7 +11,7 @@ describe("moule:app", function () {
       .inDir(path.join(os.tmpdir(), "./temp-test"))
       .withOptions({ "skip-install": true })
       .withPrompt({
-        someOption: true
+        hasBlog: true
       })
       .on("end", done);
   });
@@ -20,8 +20,9 @@ describe("moule:app", function () {
     assert.file([
       "bower.json",
       "package.json",
-      ".editorconfig",
-      ".jshintrc"
+      "_config.yml",
+      "source/_posts",
+      ".scss-lint.yml"
     ]);
   });
 });
