@@ -1,14 +1,14 @@
 {
   "name": "generator-moule",
   "version": "0.1.0",
-  "description": "Yeoman generator",
+  "description": "A Yeoman generator using Gulp and Jekyll.",
   "license": "MIT",
   "main": "app/index.js",
   "repository": "kaishin/generator-moule",
   "author": {
     "name": "Reda Lemeden",
-    "email": "reda@thoughtbot.com",
-    "url": "https://github.com/kaishin"
+    "email": "hello@redalemeden.com",
+    "url": "http://redalemeden.com"
   },
   "engines": {
     "node": ">=0.10.0"
@@ -20,7 +20,10 @@
     "app"
   ],
   "keywords": [
-    "yeoman-generator"
+    "yeoman-generator",
+    "yeoman",
+    "gulp",
+    "jekyll"
   ],
   "dependencies": {
     "yeoman-generator": "^0.18.0",
