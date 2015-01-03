@@ -26,7 +26,7 @@ paths =
   destinationStyles: "#{destinationFolder}/css/"
   scripts: "#{sourceFolder}/scripts/"
   destinationScripts: "#{destinationFolder}/scripts/"
-  jekyllFiles: ["#{sourceFolder}/**/*.md", "#{sourceFolder}/**/*.html", "#{sourceFolder}/**/*.xml"]
+  jekyllFiles: ["#{sourceFolder}/**/*.md", "#{sourceFolder}/**/*.html", "#{sourceFolder}/**/*.xml", "./**/*.yml"]
 
 gulp.task "default", ["develop"]
 
