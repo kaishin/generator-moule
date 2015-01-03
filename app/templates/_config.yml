@@ -36,4 +36,10 @@ defaults:
     scope:
       path: ""
     values:
-      layout: default
+      layout: default<% if (hasBlog) { %>
+  -
+    scope:
+      path: ""
+      type: posts
+    values:
+      layout: post<% } %>
