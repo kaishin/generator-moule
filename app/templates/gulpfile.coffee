@@ -29,7 +29,10 @@ paths =
   jekyllFiles: ["#{sourceFolder}/**/*.md", "#{sourceFolder}/**/*.html", "#{sourceFolder}/**/*.xml"]
 
 gulp.task "default", ["develop"]
-gulp.task "develop", ["browser-sync", "watch"]
+
+gulp.task "develop", ->
+  runSequence ["watch", "browser-sync"]
+
 gulp.task "build", ->
   runSequence ["sass", "coffee"], ["minifyCSS", "minifyJS"], "jekyll-build"
 
