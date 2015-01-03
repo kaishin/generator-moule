@@ -3,6 +3,7 @@ source: source
 title: <%= projectName %>
 description: <%= projectDescription %>
 tagline: <%= projectTagline %>
+keywords: [<%= projectKeywords %>]
 baseurl: ""
 
 url: <%= projectUrl %>

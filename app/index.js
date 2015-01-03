@@ -44,6 +44,10 @@ module.exports = yeoman.generators.Base.extend({
       message: "Project tagline:",
       default: "My awesome tagline"
     }, {
+      name: "projectKeywords",
+      message: "Project keywords (comma+space separated):",
+      default: ""
+    }, {
       name: "projectUrl",
       message: "Project production URL:"
     }, {
@@ -57,6 +61,7 @@ module.exports = yeoman.generators.Base.extend({
       this.projectName = props.projectName;
       this.projectDescription = props.projectDescription;
       this.projectTagline = props.projectTagline;
+      this.projectKeywords = props.projectKeywords;
       this.projectUrl = props.projectUrl;
       this.authorName = props.authorName;
       this.hasBlog = props.hasBlog;
