@@ -49,7 +49,8 @@ module.exports = yeoman.generators.Base.extend({
       default: ""
     }, {
       name: "projectUrl",
-      message: "Project production URL:"
+      message: "Project production URL:",
+      default: "http://example.com"
     }, {
       name: "hasBlog",
       type: "confirm",
