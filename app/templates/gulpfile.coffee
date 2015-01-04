@@ -34,7 +34,7 @@ gulp.task "develop", ->
   runSequence ["watch", "browser-sync"]
 
 gulp.task "build", ->
-  runSequence ["sass", "coffee"], ["minifyCSS", "minifyJS"], "jekyll-build"
+  runSequence ["sass", "coffee"], "lintSass", ["minifyCSS", "minifyJS"], "jekyll-build"
 
 gulp.task "clean",
   del.bind(null, ["_site"])
@@ -57,7 +57,7 @@ gulp.task "jekyll-rebuild", ["jekyll-serve"], ->
 gulp.task "doctor",
   shell.task "jekyll doctor"
 
-gulp.task "sass", ["lintSass"], ->
+gulp.task "sass", ->
   gulp.src("#{paths.sass}/*.scss")
     .pipe sass
       errLogToConsole: true
