@@ -40,8 +40,8 @@ gulp.task "clean",
   del.bind(null, ["_site"])
 
 gulp.task "watch", ["sass", "coffee", "jekyll-serve"], ->
-  gulp.watch "#{paths.sass}/*.scss", ["sass"]
-  gulp.watch "#{paths.coffee}/*.coffee", ["coffee"]
+  gulp.watch "#{paths.sass}/**/*.scss", ["sass"]
+  gulp.watch "#{paths.coffee}/**/*.coffee", ["coffee"]
   gulp.watch paths.jekyllFiles, ["jekyll-rebuild"]
 
 gulp.task "jekyll-serve",
