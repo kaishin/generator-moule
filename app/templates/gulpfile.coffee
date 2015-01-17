@@ -4,6 +4,7 @@ coffee = require "gulp-coffee"
 del = require "del"
 gulp = require "gulp"
 gutil = require "gulp-util"
+include = require "gulp-include"
 mediaQueries = require "gulp-combine-media-queries"
 minifyCSS = require "gulp-minify-css"
 minifyJS = require "gulp-uglify"
@@ -34,7 +35,7 @@ gulp.task "develop", ->
   runSequence ["watch", "browser-sync"]
 
 gulp.task "build", ->
-  runSequence ["sass", "coffee"], "lintSass", ["minifyCSS", "minifyJS"], "jekyll-build"
+  runSequence ["sass", "coffee", "vendorJS"], "lintSass", ["minifyCSS", "minifyJS"], "jekyll-build"
 
 gulp.task "clean",
   del.bind(null, ["_site"])
@@ -42,6 +43,7 @@ gulp.task "clean",
 gulp.task "watch", ["sass", "coffee", "jekyll-serve"], ->
   gulp.watch "#{paths.sass}/**/*.scss", ["sass"]
   gulp.watch "#{paths.coffee}/**/*.coffee", ["coffee"]
+  gulp.watch "#{paths.coffee}/vendor.js", ["vendorJS"]
   gulp.watch paths.jekyllFiles, ["jekyll-rebuild"]
 
 gulp.task "jekyll-serve",
@@ -88,6 +90,14 @@ gulp.task "coffee", ->
   gulp.src("#{paths.coffee}/*.coffee")
     .pipe cache paths.coffee
     .pipe coffee bare: true
+    .on "error", (error) -> gutil.log(error.message)
+    .pipe gulp.dest(paths.destinationScripts)
+    .pipe gulp.dest(paths.scripts)
+    .pipe browserSync.reload(stream: true)
+
+gulp.task "vendorJS", ->
+  gulp.src("#{paths.coffee}/vendor.js")
+    .pipe include()
     .on "error", (error) -> gutil.log(error.message)
     .pipe gulp.dest(paths.destinationScripts)
     .pipe gulp.dest(paths.scripts)
