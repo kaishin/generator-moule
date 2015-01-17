@@ -47,7 +47,7 @@ gulp.task "watch", ["sass", "coffee", "jekyll-serve"], ->
   gulp.watch paths.jekyllFiles, ["jekyll-rebuild"]
 
 gulp.task "jekyll-serve",
-  shell.task "jekyll build --config _config.yml,_config.serve.yml", quiet: true
+  shell.task "bundle exec jekyll build --config _config.yml,_config.serve.yml", quiet: true
   browserSync.notify messages.jekyllBuild
 
 gulp.task "jekyll-build",
