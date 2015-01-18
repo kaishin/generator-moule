@@ -51,7 +51,7 @@ gulp.task "jekyll-serve",
   browserSync.notify messages.jekyllBuild
 
 gulp.task "jekyll-build",
-  shell.task "jekyll build"
+  shell.task "bundle exec jekyll build"
 
 gulp.task "jekyll-rebuild", ["jekyll-serve"], ->
   browserSync.reload()
