@@ -17,7 +17,7 @@ shell = require "gulp-shell"
 messages =
   jekyllBuild: "Rebuilding Jekyll..."
 
-sourceFolder = "./source"
+sourceFolder = <% if (!ghPages) { %>"./source"<% } else { %>"."<% } %>
 destinationFolder = "./_site"
 
 paths =

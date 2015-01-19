@@ -56,6 +56,11 @@ module.exports = yeoman.generators.Base.extend({
       type: "confirm",
       message: "Enable blog support?",
       default: true
+     }, {
+      name: "ghPages",
+      type: "confirm",
+      message: "Enable Github Pages support?",
+      default: true
     }];
 
     this.prompt(prompts, function (props) {
@@ -66,12 +71,15 @@ module.exports = yeoman.generators.Base.extend({
       this.projectUrl = props.projectUrl;
       this.authorName = props.authorName;
       this.hasBlog = props.hasBlog;
+      this.ghPages = props.ghPages;
 
       done();
     }.bind(this));
   },
 
   scaffolding: function () {
+    var sourceFolder = this.ghPages ? "./" : "./source/";
+
     this.copy("Gemfile");
     this.copy("bowerrc", ".bowerrc");
     this.template("_package.json", "package.json");
@@ -80,24 +88,24 @@ module.exports = yeoman.generators.Base.extend({
     this.template("_config.serve.yml");
     this.template("README.md");
     this.copy("gulp.js");
-    this.copy("gulpfile.coffee");
+    this.template("gulpfile.coffee");
     this.copy("gitignore", ".gitignore");
     this.copy("editorconfig", ".editorconfig");
-    this.copy("scss-lint.yml", ".scss-lint.yml");
-    this.directory("source/_coffee");
-    this.directory("source/_layouts");
-    this.copy("source/_layouts/page.html");
-    this.copy("source/_layouts/default.html");
-    this.directory("source/_includes");
-    this.directory("source/_scss");
-    this.directory("source/css");
-    this.directory("source/scripts");
-    this.copy("source/index.md");
+    this.template("scss-lint.yml", ".scss-lint.yml");
+    this.directory("source/_coffee", sourceFolder + "_coffee");
+    this.directory("source/_layouts", sourceFolder + "_layouts");
+    this.copy("source/_layouts/page.html", sourceFolder + "_layouts/page.html");
+    this.copy("source/_layouts/default.html", sourceFolder + "_layouts/default.html");
+    this.directory("source/_includes", sourceFolder + "_includes");
+    this.directory("source/_scss", sourceFolder + "_scss");
+    this.directory("source/css", sourceFolder + "css");
+    this.directory("source/scripts", sourceFolder + "scripts");
+    this.copy("source/index.md", sourceFolder + "index.md");
 
     if (this.hasBlog) {
-      this.directory("source/_posts");
-      this.copy("source/feed.xml");
-      this.copy("source/_layouts/post.html");
+      this.directory("source/_posts", sourceFolder + "_posts");
+      this.copy("source/feed.xml", sourceFolder + "feed.xml");
+      this.copy("source/_layouts/post.html", sourceFolder + "_layouts/post.html");
     }
   },
 

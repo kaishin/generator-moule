@@ -1,25 +1,21 @@
-source: source
-
 title: <%= projectName %>
 description: <%= projectDescription %>
 tagline: <%= projectTagline %>
 keywords: [<%= projectKeywords %>]
+author:
+  name: <%= authorName %>
+<% if (!ghPages) { %>source: source<% } %>
 baseurl: ""
-
 url: <%= projectUrl %>
 future: false
 show_drafts: false
-lsi: true
 limit_posts: 0
-
-author:
-  name: <%= authorName %>
 
 markdown: kramdown
 kramdown:
   input: GFM
   syntax_highlighter: rouge
-
+<% if (!ghPages) { %>lsi: true<% } %>
 permalink: pretty
 exclude: [
   "node_modules",

@@ -1,4 +1,4 @@
-scss_files: "source/_scss/**/*.scss"
+scss_files: "<% if (!ghPages) { %>./source<% } else { %>.<% } %>/_scss/**/*.scss"
 
 linters:
   BangFormat:
