@@ -27,7 +27,14 @@ paths =
   destinationStyles: "#{destinationFolder}/css/"
   scripts: "#{sourceFolder}/scripts/"
   destinationScripts: "#{destinationFolder}/scripts/"
-  jekyllFiles: ["#{sourceFolder}/**/*.md", "#{sourceFolder}/**/*.html", "#{sourceFolder}/**/*.xml", "./**/*.yml"]
+  jekyllFiles: [
+    "#{sourceFolder}/**/*.html",
+    "#{sourceFolder}/**/*.md",
+    "#{sourceFolder}/**/*.yml",
+    "#{sourceFolder}/**/*.xml",
+    "!#{sourceFolder}/node_modules/**/*",
+    "!#{destinantionFolder}/**/*"
+  ]
 
 gulp.task "default", ["develop"]
 
@@ -113,7 +120,7 @@ gulp.task "minifyJS", ->
 gulp.task "browser-sync", ->
   browserSync.init null,
     server:
-      baseDir: "_site"
+      baseDir: destinationFolder
     host: "localhost"
     port: 4000
     open: true
