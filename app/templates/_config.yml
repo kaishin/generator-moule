@@ -1,9 +1,9 @@
-title: <%= projectName %>
-description: <%= projectDescription %>
-tagline: <%= projectTagline %>
+title: "<%= projectName %>"
+description: "<%= projectDescription %>"
+tagline: "<%= projectTagline %>"
 keywords: [<%= projectKeywords %>]
 author:
-  name: <%= authorName %>
+  name: "<%= authorName %>"
 <% if (!ghPages) { %>source: source<% } %>
 baseurl: ""
 url: <%= projectUrl %>
