@@ -1,3 +1,3 @@
 {
-  "directory": "source/_vendor"
+  "directory": "<% if (!ghPages) { %>source/<% } %>_vendor"
 }
