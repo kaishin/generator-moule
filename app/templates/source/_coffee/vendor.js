@@ -1,1 +1,1 @@
-//= include ../_vendor/**/*.js
+//= include ../_vendor/zepto/zepto.js
