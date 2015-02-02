@@ -80,28 +80,28 @@ module.exports = yeoman.generators.Base.extend({
   scaffolding: function () {
     var sourceFolder = this.ghPages ? "./" : "./source/";
 
-    this.copy("Gemfile");
     this.copy("bowerrc", ".bowerrc");
-    this.template("_package.json", "package.json");
-    this.template("bower.json");
-    this.template("_config.yml");
-    this.template("_config.serve.yml");
-    this.template("README.md");
-    this.copy("gulp.js");
-    this.template("gulpfile.coffee");
-    this.copy("gitignore", ".gitignore");
     this.copy("editorconfig", ".editorconfig");
-    this.template("scss-lint.yml", ".scss-lint.yml");
-    this.directory("source/_coffee", sourceFolder + "_coffee");
-    this.directory("source/_layouts", sourceFolder + "_layouts");
-    this.copy("source/_layouts/page.html", sourceFolder + "_layouts/page.html");
+    this.copy("Gemfile");
+    this.copy("gitignore", ".gitignore");
+    this.copy("gulp.js");
     this.copy("source/_layouts/default.html", sourceFolder + "_layouts/default.html");
+    this.copy("source/_layouts/page.html", sourceFolder + "_layouts/page.html");
+    this.copy("source/index.md", sourceFolder + "index.md");
+    this.directory("source/_coffee", sourceFolder + "_coffee");
     this.directory("source/_includes", sourceFolder + "_includes");
-    this.directory("source/images", sourceFolder + "images");
+    this.directory("source/_layouts", sourceFolder + "_layouts");
     this.directory("source/_scss", sourceFolder + "_scss");
     this.directory("source/css", sourceFolder + "css");
+    this.directory("source/images", sourceFolder + "images");
     this.directory("source/scripts", sourceFolder + "scripts");
-    this.copy("source/index.md", sourceFolder + "index.md");
+    this.template("_config.serve.yml");
+    this.template("_config.yml");
+    this.template("_package.json", "package.json");
+    this.template("bower.json");
+    this.template("gulpfile.coffee");
+    this.template("README.md");
+    this.template("scss-lint.yml", ".scss-lint.yml");
 
     if (this.hasBlog) {
       this.directory("source/_posts", sourceFolder + "_posts");
