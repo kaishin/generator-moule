@@ -88,6 +88,7 @@ module.exports = yeoman.generators.Base.extend({
     this.copy("source/_layouts/default.html", sourceFolder + "_layouts/default.html");
     this.copy("source/_layouts/page.html", sourceFolder + "_layouts/page.html");
     this.copy("source/index.md", sourceFolder + "index.md");
+    this.copy("source/robots.txt", sourceFolder + "robots.txt");
     this.directory("source/_coffee", sourceFolder + "_coffee");
     this.directory("source/_includes", sourceFolder + "_includes");
     this.directory("source/_layouts", sourceFolder + "_layouts");
