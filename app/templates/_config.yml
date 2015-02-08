@@ -10,7 +10,8 @@ url: <%= projectUrl %>
 future: false
 show_drafts: false
 limit_posts: 0
-
+<% if (ghPages) { %>gems:
+  - jekyll-sitemap<% } %>
 markdown: kramdown
 kramdown:
   input: GFM
