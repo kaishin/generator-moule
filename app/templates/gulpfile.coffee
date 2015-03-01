@@ -14,6 +14,14 @@ sass = require "gulp-sass"
 scssLint = require "gulp-scss-lint"
 shell = require "gulp-shell"
 
+<% if (hasBlog) { %>argv = require("yargs").argv
+dateFormat = require "dateformat"
+rename = require "gulp-rename"
+replace = require "gulp-replace"
+slugify = require "underscore.string/slugify"
+now = new Date()
+title = argv.t ? "Untitled"
+dashedTitle = slugify(title)<% } %>
 messages =
   jekyllBuild: "Rebuilding Jekyll..."
 
@@ -125,3 +133,10 @@ gulp.task "browser-sync", ->
     port: 4000
     open: true
     browser: "chrome"
+
+<% if (hasBlog) { %> gulp.task "post", ->
+  gulp.src("./_posts/_template.md")
+    .pipe rename "#{dateFormat(now, 'yyyy-dd-mm')}-#{dashedTitle}.md"
+    .pipe replace(/DATE_PLACEHOLDER/g, "#{dateFormat(now, 'yyyy-dd-mm hh:MM:ss o')}")
+    .pipe replace(/TITLE_PLACEHOLDER/g, dashedTitle)
+    .pipe gulp.dest("./_posts")<% } %>
