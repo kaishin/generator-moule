@@ -50,25 +50,25 @@ gulp.task "develop", ->
   runSequence ["watch", "browser-sync"]
 
 gulp.task "build", ->
-  runSequence ["sass", "coffee", "vendorJS"], "lintSass", "jekyll-build"
+  runSequence ["sass", "coffee", "vendor-javascript"], "lint-scss", "jekyll-build"
 
 gulp.task "clean",
   del.bind(null, ["_site"])
 
-gulp.task "watch", ["sass", "coffee", "jekyll-serve"], ->
+gulp.task "watch", ["sass", "coffee", "jekyll-build-local"], ->
   gulp.watch "#{paths.sass}/**/*.scss", ["sass"]
   gulp.watch "#{paths.coffee}/**/*.coffee", ["coffee"]
-  gulp.watch "#{paths.coffee}/vendor.js", ["vendorJS"]
-  gulp.watch paths.jekyllFiles, ["jekyll-rebuild"]
+  gulp.watch "#{paths.coffee}/vendor.js", ["vendor-javascript"]
+  gulp.watch paths.jekyllFiles, ["jekyll-reload"]
 
-gulp.task "jekyll-serve",
+gulp.task "jekyll-build-local",
   shell.task "bundle exec jekyll build --config _config.yml,_config.serve.yml", quiet: true
   browserSync.notify messages.jekyllBuild
 
 gulp.task "jekyll-build",
   shell.task "bundle exec jekyll build"
 
-gulp.task "jekyll-rebuild", ["jekyll-serve"], ->
+gulp.task "jekyll-reload", ["jekyll-build-local"], ->
   browserSync.reload()
 
 gulp.task "doctor",
@@ -87,7 +87,7 @@ gulp.task "sass", ->
     .pipe gulp.dest(paths.styles)
     .pipe browserSync.reload(stream: true)
 
-gulp.task "lintSass", ->
+gulp.task "lint-scss", ->
   gulp.src("#{paths.sass}/*.scss")
     .pipe cache paths.sass
     .pipe scssLint
@@ -107,7 +107,7 @@ gulp.task "coffee", ->
     .pipe gulp.dest(paths.scripts)
     .pipe browserSync.reload(stream: true)
 
-gulp.task "vendorJS", ->
+gulp.task "vendor-javascript", ->
   gulp.src("#{paths.coffee}/vendor.js")
     .pipe include()
     .on "error", (error) -> gutil.log(error.message)
@@ -123,8 +123,6 @@ gulp.task "browser-sync", ->
       baseDir: destinationFolder
     host: "localhost"
     port: 4000
-    open: true
-    browser: "chrome"
 
 <% if (hasBlog) { %> gulp.task "post", ->
   gulp.src("./_posts/_template.md")
