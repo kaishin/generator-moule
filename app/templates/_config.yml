@@ -19,6 +19,7 @@ kramdown:
 <% if (!ghPages) { %>lsi: true<% } %>
 permalink: pretty
 exclude: [
+  "bower.json",
   "node_modules",
   "gulp.js",
   "gulpfile.coffee",
