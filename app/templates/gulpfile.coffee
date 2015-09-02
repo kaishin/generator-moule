@@ -52,6 +52,9 @@ gulp.task "develop", ->
 gulp.task "build", ->
   runSequence ["sass", "coffee", "vendor-javascript"], "lint-scss", "jekyll-build"
 
+gulp.task "rebuild", ->
+  runSequence "jekyll-build-local", "reload"
+
 gulp.task "clean",
   del.bind(null, ["_site"])
 
@@ -59,16 +62,15 @@ gulp.task "watch", ["sass", "coffee", "jekyll-build-local"], ->
   gulp.watch "#{paths.sass}/**/*.scss", ["sass"]
   gulp.watch "#{paths.coffee}/**/*.coffee", ["coffee"]
   gulp.watch "#{paths.coffee}/vendor.js", ["vendor-javascript"]
-  gulp.watch paths.jekyllFiles, ["jekyll-reload"]
+  gulp.watch paths.jekyllFiles, ["rebuild"]
 
 gulp.task "jekyll-build-local",
   shell.task "bundle exec jekyll build --config _config.yml,_config.serve.yml", quiet: true
-  browserSync.notify messages.jekyllBuild
 
 gulp.task "jekyll-build",
   shell.task "bundle exec jekyll build"
 
-gulp.task "jekyll-reload", ["jekyll-build-local"], ->
+gulp.task "reload", ->
   browserSync.reload()
 
 gulp.task "doctor",
