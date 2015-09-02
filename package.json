@@ -1,6 +1,6 @@
 {
   "name": "generator-moule",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "A Yeoman generator using Gulp and Jekyll.",
   "license": "MIT",
   "main": "app/index.js",
@@ -26,17 +26,17 @@
     "jekyll"
   ],
   "dependencies": {
-    "yeoman-generator": "^0.18.0",
-    "chalk": "^0.5.0",
-    "shelljs": "~0.3.0",
-    "yosay": "^0.3.0"
+    "yeoman-generator": "^0.20.0",
+    "chalk": "^1.1.0",
+    "shelljs": "^0.5.0",
+    "yosay": "^1.0.0"
   },
   "devDependencies": {
     "mocha": "*"
   },
   "peerDependencies": {
-    "generator-mocha": ">=0.1.5",
-    "yo": ">=1.1.2",
-    "gulp": ">=3.5.0"
+    "generator-mocha": "^0.2.0",
+    "yo": "^1.4.0",
+    "gulp": "~3.9.0"
   }
 }
