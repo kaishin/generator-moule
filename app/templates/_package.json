@@ -1,5 +1,5 @@
 {
-  "name": "<%= _.slugify(projectName) %>",
+  "name": "<%= projectSlug %>",
   "private": true,
   "main": "gulp.js",
   "devDependencies": {

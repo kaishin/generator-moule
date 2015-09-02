@@ -4,6 +4,7 @@ var chalk = require("chalk");
 var yosay = require("yosay");
 var shelljs = require("shelljs");
 var path = require("path");
+var _ = require("lodash");
 
 module.exports = yeoman.generators.Base.extend({
   init: function() {
@@ -65,6 +66,7 @@ module.exports = yeoman.generators.Base.extend({
 
     this.prompt(prompts, function (props) {
       this.projectName = props.projectName;
+      this.projectSlug = _.kebabCase(props.projectName);
       this.projectDescription = props.projectDescription;
       this.projectTagline = props.projectTagline;
       this.projectKeywords = props.projectKeywords;

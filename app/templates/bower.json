@@ -1,5 +1,5 @@
 {
-  "name": "<%= _.slugify(projectName) %>",
+  "name": "<%= projectSlug %>",
   "private": true,
   "devDependencies": {
     "normalize-scss": "~3.0.2",
