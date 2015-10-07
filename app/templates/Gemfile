@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 gem "jekyll", "~> 2.5.3"
-<% if (ghPages) { %>gem "jekyll-sitemap", "~> 0.8.0"<% } %>
-gem "rouge", "~> 1.9.0"
-gem "kramdown", "~> 1.8.0"
+<% if (ghPages) { %>gem "jekyll-sitemap", "~> 0.9.0"<% } %>
+gem "rouge", "~> 1.10.0"
+gem "kramdown", "~> 1.9.0"
 gem "scss-lint", "~> 0.38.0"
