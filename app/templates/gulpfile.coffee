@@ -50,7 +50,7 @@ gulp.task "develop", ->
   runSequence ["watch", "browser-sync"]
 
 gulp.task "build", ->
-  runSequence ["sass", "coffee", "vendor-javascript"], "lint-scss", "jekyll-build"
+  runSequence ["sass", "coffee", "script-vendor"], "lint-scss", "jekyll-build"
 
 gulp.task "rebuild", ->
   runSequence "jekyll-build-local", "reload"
@@ -61,7 +61,7 @@ gulp.task "clean",
 gulp.task "watch", ["sass", "coffee", "jekyll-build-local"], ->
   gulp.watch "#{paths.sass}/**/*.scss", ["sass"]
   gulp.watch "#{paths.coffee}/**/*.coffee", ["coffee"]
-  gulp.watch "#{paths.coffee}/vendor.js", ["vendor-javascript"]
+  gulp.watch "#{paths.coffee}/vendor.js", ["script-vendor"]
   gulp.watch paths.jekyllFiles, ["rebuild"]
 
 gulp.task "jekyll-build-local",
@@ -109,7 +109,7 @@ gulp.task "coffee", ->
     .pipe gulp.dest(paths.scripts)
     .pipe browserSync.reload(stream: true)
 
-gulp.task "vendor-javascript", ->
+gulp.task "script-vendor", ->
   gulp.src("#{paths.coffee}/vendor.js")
     .pipe include()
     .on "error", (error) -> gutil.log(error.message)
