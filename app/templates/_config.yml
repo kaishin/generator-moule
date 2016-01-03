@@ -27,6 +27,11 @@ exclude: [
   "Gemfile.lock"
 ]
 
+keep_files: [
+  "css/",
+  "scripts/"
+]
+
 defaults:
   -
     scope:

@@ -5,8 +5,7 @@ del = require("del")
 gulp = require("gulp")
 gutil = require("gulp-util")
 include = require("gulp-include")
-mediaQueries = require("gulp-combine-media-queries")
-minifyCSS = require("gulp-minify-css")
+minifyCSS = require("gulp-cssnano")
 minifyJS = require("gulp-uglify")
 prefix = require("gulp-autoprefixer")
 runSequence = require("run-sequence")
@@ -33,10 +32,8 @@ destinationFolder = "./_site"
 paths = {
   sass: sourceFolder + "/_scss/",
   coffee: sourceFolder + "/_coffee/",
-  styles: sourceFolder + "/css/",
-  destinationStyles: destinationFolder + "/css/",
-  scripts: sourceFolder + "/scripts/",
-  destinationScripts: destinationFolder + "/scripts/",
+  styles: destinationFolder + "/css/",
+  scripts: destinationFolder + "/scripts/",
   jekyllFiles: [sourceFolder + "/**/*.html", sourceFolder + "/**/*.md", sourceFolder + "/**/*.yml", sourceFolder + "/**/*.xml", "!" + sourceFolder + "/node_modules/**/*", "!" + destinationFolder + "/**/*"]
 }
 
@@ -84,10 +81,8 @@ gulp.task("sass", function() {
   .pipe(prefix(["last 2 versions", "> 2%", "ie 11", "Firefox ESR"], {
     cascade: false
   }))
-  .pipe(mediaQueries())
   .pipe(cache(paths.styles))
   .pipe(minifyCSS())
-  .pipe(gulp.dest(paths.destinationStyles))
   .pipe(gulp.dest(paths.styles))
   .pipe(browserSync.reload({
     stream: true
@@ -118,7 +113,6 @@ gulp.task("coffee", function() {
   })
   .pipe(cache(paths.scripts))
   .pipe(minifyJS())
-  .pipe(gulp.dest(paths.destinationScripts))
   .pipe(gulp.dest(paths.scripts))
   .pipe(browserSync.reload({
     stream: true
@@ -133,7 +127,6 @@ gulp.task("script-vendor", function() {
   })
   .pipe(cache(paths.scripts))
   .pipe(minifyJS())
-  .pipe(gulp.dest(paths.destinationScripts))
   .pipe(gulp.dest(paths.scripts))
   .pipe(browserSync.reload({
     stream: true
