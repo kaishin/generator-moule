@@ -1,9 +1,7 @@
-"use strict";
-
-var path = require("path");
-var assert = require("yeoman-assert");
-var test = require("yeoman-test");
-var os = require("os");
+path = require("path");
+assert = require("yeoman-assert");
+test = require("yeoman-test");
+os = require("os");
 
 describe("moule:app", function () {
   before(function (done) {
@@ -11,8 +9,7 @@ describe("moule:app", function () {
       .withOptions({ "skip-install": true })
       .withArguments([])
       .withPrompts({
-        hasBlog: true,
-        ghPages: true
+        hasBlog: true
       })
       .on("end", done);
   });
@@ -22,7 +19,7 @@ describe("moule:app", function () {
       "bower.json",
       "package.json",
       "_config.yml",
-      "_posts",
+      "source/_posts",
       ".scss-lint.yml"
     ]);
   });
