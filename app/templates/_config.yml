@@ -4,25 +4,24 @@ tagline: "<%= projectTagline %>"
 keywords: [<%= projectKeywords %>]
 author:
   name: "<%= authorName %>"
-<% if (!ghPages) { %>source: source<% } %>
+
 baseurl: ""
 url: <%= projectUrl %>
 future: false
 show_drafts: false
 limit_posts: 0
-<% if (ghPages) { %>gems:
-  - jekyll-sitemap<% } %>
+source: source
 markdown: kramdown
+lsi: true
+permalink: pretty
 kramdown:
   input: GFM
   syntax_highlighter: rouge
-<% if (!ghPages) { %>lsi: true<% } %>
-permalink: pretty
+
 exclude: [
   "bower.json",
   "node_modules",
-  "gulp.js",
-  "gulpfile.coffee",
+  "gulpfile.js",
   "package.json",
   "README.md",
   "Gemfile",
