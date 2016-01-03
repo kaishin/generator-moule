@@ -1,16 +1,16 @@
 "use strict";
 
 var path = require("path");
-var assert = require("yeoman-generator").assert;
-var helpers = require("yeoman-generator").test;
+var assert = require("yeoman-assert");
+var test = require("yeoman-test");
 var os = require("os");
 
 describe("moule:app", function () {
   before(function (done) {
-    helpers.run(path.join(__dirname, "../app"))
-      .inDir(path.join(os.tmpdir(), "./temp-test"))
+    test.run(path.join(__dirname, "../app"))
       .withOptions({ "skip-install": true })
-      .withPrompt({
+      .withArguments([])
+      .withPrompts({
         hasBlog: true,
         ghPages: true
       })
