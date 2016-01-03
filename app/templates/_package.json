@@ -1,7 +1,7 @@
 {
   "name": "<%= projectSlug %>",
   "private": true,
-  "main": "gulp.js",
+  "main": "gulpfile.js",
   "devDependencies": {
     "browser-sync": "^2.8.0",
     "coffee-script": "^1.9.0",
