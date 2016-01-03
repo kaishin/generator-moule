@@ -16,7 +16,6 @@ lsi: true
 permalink: pretty
 kramdown:
   input: GFM
-  syntax_highlighter: rouge
 
 exclude: [
   "bower.json",

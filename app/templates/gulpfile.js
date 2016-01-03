@@ -63,11 +63,11 @@ gulp.task("watch", ["sass", "coffee", "jekyll-build-local"], function() {
   gulp.watch(paths.jekyllFiles, ["rebuild"])
 })
 
-gulp.task("jekyll-build-local", shell.task("bundle exec jekyll build --config _config.yml,_config.serve.yml", {
+gulp.task("jekyll-build-local", shell.task("bundle exec jekyll build --incremental --config _config.yml,_config.serve.yml", {
   quiet: true
 }))
 
-gulp.task("jekyll-build", shell.task("bundle exec jekyll build"))
+gulp.task("jekyll-build", shell.task("bundle exec jekyll build --incremental"))
 
 gulp.task("reload", function() {
   browserSync.reload()
