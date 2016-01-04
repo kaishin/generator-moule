@@ -1,6 +1,5 @@
 browserSync = require("browser-sync")
 cache = require("gulp-cached")
-coffee = require("gulp-coffee")
 del = require("del")
 gulp = require("gulp")
 gutil = require("gulp-util")
@@ -31,7 +30,7 @@ destinationFolder = "./_site"
 
 paths = {
   sass: sourceFolder + "/_scss/",
-  coffee: sourceFolder + "/_coffee/",
+  sourceScripts: sourceFolder + "/_scripts/",
   styles: destinationFolder + "/css/",
   scripts: destinationFolder + "/scripts/",
   jekyllFiles: [sourceFolder + "/**/*.html", sourceFolder + "/**/*.md", sourceFolder + "/**/*.yml", sourceFolder + "/**/*.xml", "!" + sourceFolder + "/node_modules/**/*", "!" + destinationFolder + "/**/*"]
@@ -44,7 +43,7 @@ gulp.task("develop", function() {
 })
 
 gulp.task("build", function() {
-  runSequence(["sass", "coffee", "script-vendor"], "lint-scss", "jekyll-build")
+  runSequence(["sass", "minify-scripts", "vendorize-scripts"], "lint-scss", "jekyll-build")
 })
 
 gulp.task("rebuild", function() {
@@ -53,10 +52,10 @@ gulp.task("rebuild", function() {
 
 gulp.task("clean", del.bind(null, ["_site"]))
 
-gulp.task("watch", ["sass", "coffee", "jekyll-build-local"], function() {
+gulp.task("watch", ["sass", "minify-scripts", "jekyll-build-local"], function() {
   gulp.watch(paths.sass + "/**/*.scss", ["sass"])
-  gulp.watch(paths.coffee + "/**/*.coffee", ["coffee"])
-  gulp.watch(paths.coffee + "/vendor.js", ["script-vendor"])
+  gulp.watch(paths.sourceScripts + "/**/*.js", ["minify-scripts"])
+  gulp.watch(paths.sourceScripts + "/vendor.js", ["vendorize-scripts"])
   gulp.watch(paths.jekyllFiles, ["rebuild"])
 })
 
@@ -97,21 +96,12 @@ gulp.task("lint-scss", function() {
     "bundleExec": true
   }))
   .pipe(scssLint.failReporter())
-  .on("error", function(error) {
-    gutil.log(error.message)
-  })
+  .on("error", function(error) { gutil.log(error.message) })
 })
 
-gulp.task("coffee", function() {
-  gulp.src(paths.coffee + "/*.coffee")
-  .pipe(cache(paths.coffee))
-  .pipe(coffee({
-    bare: true
-  }))
-  .on("error", function(error) {
-    gutil.log(error.message)
-  })
-  .pipe(cache(paths.scripts))
+gulp.task("minify-scripts", function() {
+  gulp.src([paths.sourceScripts + "/*.js", "!" + paths.sourceScripts + "/vendor.js"])
+  .pipe(cache("minify-scripts"))
   .pipe(minifyJS())
   .pipe(gulp.dest(paths.scripts))
   .pipe(browserSync.reload({
@@ -119,13 +109,11 @@ gulp.task("coffee", function() {
   }))
 })
 
-gulp.task("script-vendor", function() {
-  gulp.src(paths.coffee + "/vendor.js")
+gulp.task("vendorize-scripts", function() {
+  gulp.src(paths.sourceScripts + "/vendor.js")
   .pipe(include())
-  .on("error", function(error) {
-    gutil.log(error.message)
-  })
-  .pipe(cache(paths.scripts))
+  .on("error", function(error) { gutil.log(error.message) })
+  .pipe(cache("vendorize-scripts"))
   .pipe(minifyJS())
   .pipe(gulp.dest(paths.scripts))
   .pipe(browserSync.reload({

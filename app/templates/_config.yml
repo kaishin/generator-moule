@@ -28,8 +28,8 @@ exclude: [
 ]
 
 keep_files: [
-  "css/",
-  "scripts/"
+  "css",
+  "scripts"
 ]
 
 defaults:
