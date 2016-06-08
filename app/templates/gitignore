@@ -1,5 +1,6 @@
 .DS_Store
 .jekyll-metadata
+.publish
 _site
 _vendor/
 node_modules/
