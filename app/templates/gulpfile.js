@@ -74,9 +74,9 @@ gulp.task("doctor", shell.task("jekyll doctor"))
 gulp.task("generate-css", function() {
   gulp.src(paths.sourceStylesheets + "/*.scss")
   .pipe(sass({
-    errLogToConsole: true,
     precision: 2
   }))
+  .on("error", sass.logError)
   .pipe(prefix(["last 2 versions", "> 2%", "ie 11", "Firefox ESR"], {
     cascade: false
   }))
