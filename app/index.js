@@ -5,7 +5,7 @@ shelljs = require("shelljs")
 path = require("path")
 _ = require("lodash")
 
-module.exports = yeoman.generators.Base.extend({
+module.exports = yeoman.Base.extend({
   init: function() {
     dependenciesInstalled = ["bundle", "ruby"].every(function (depend) {
       return shelljs.which(depend)
