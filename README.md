@@ -1,5 +1,6 @@
-### Moule [![Circle CI](https://circleci.com/gh/kaishin/generator-moule.svg?style=svg)](https://circleci.com/gh/kaishin/generator-moule) ![](https://img.shields.io/npm/v/generator-moule.svg?style=flat)
+⚠️ This project is **deprecated**. Reason: I no longer rely on Gulp for Web developement.
 
+### Moule
 Generate gulp/Jekyll static websites using Yeoman.
 
 ```shell
